@@ -62,7 +62,7 @@ export function AuthForm({ type, onSuccess }: AuthFormProps) {
                 password: values.password,
                 options: {
                     data: {
-                        username: (values as any).username,
+                        username: (values as { username?: string }).username,
                     },
                 },
             })

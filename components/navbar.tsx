@@ -8,7 +8,7 @@ import { ModeToggle } from "@/components/mode-toggle"
 import { useEffect, useState } from "react"
 import { User } from "@supabase/supabase-js"
 import { Separator } from "@/components/ui/separator"
-import { PenBox, Menu, Search, Compass, LogOut, LayoutDashboard } from "lucide-react"
+import { PenBox, Menu, Compass, LogOut, LayoutDashboard } from "lucide-react"
 import { AuthModal } from "./auth/auth-modal"
 import {
     Sheet,
