@@ -43,12 +43,12 @@ export function AuthForm({ type, onSuccess }: AuthFormProps) {
 
     const formSchema = type === "login" ? loginSchema : signupSchema
 
-    const form = useForm<z.infer<typeof formSchema>>({
+    const form = useForm<z.infer<typeof signupSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             email: "",
             password: "",
-            ...(type === "signup" ? { username: "" } : {}),
+            username: "",
         },
     })
 
