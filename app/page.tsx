@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { Post } from "@/types/database"
-import { ArrowRight, PenLine, Sparkles, BookOpen } from "lucide-react"
+import { ArrowRight, PenLine, Sparkles } from "lucide-react"
 
 export default async function HomePage() {
   const supabase = createClient()
