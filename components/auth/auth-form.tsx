@@ -19,13 +19,8 @@ import { Input } from "@/components/ui/input"
 import { useToast } from "@/hooks/use-toast"
 import { GithubIcon } from "lucide-react"
 
-const loginSchema = z.object({
-    email: z.string().email(),
-    password: z.string().min(6),
-})
-
-const signupSchema = z.object({
-    username: z.string().min(3),
+const authSchema = z.object({
+    username: z.string().min(3).optional(),
     email: z.string().email(),
     password: z.string().min(6),
 })
@@ -41,10 +36,8 @@ export function AuthForm({ type, onSuccess }: AuthFormProps) {
     const [loading, setLoading] = useState(false)
     const supabase = createClient()
 
-    const formSchema = type === "login" ? loginSchema : signupSchema
-
-    const form = useForm<z.infer<typeof signupSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof authSchema>>({
+        resolver: zodResolver(type === "login" ? z.object({ email: z.string().email(), password: z.string().min(6) }) : authSchema.extend({ username: z.string().min(3) })),
         defaultValues: {
             email: "",
             password: "",
@@ -52,7 +45,7 @@ export function AuthForm({ type, onSuccess }: AuthFormProps) {
         },
     })
 
-    async function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: z.infer<typeof authSchema>) {
         setLoading(true)
 
         let result;
@@ -62,7 +55,7 @@ export function AuthForm({ type, onSuccess }: AuthFormProps) {
                 password: values.password,
                 options: {
                     data: {
-                        username: (values as { username?: string }).username,
+                        username: values.username,
                     },
                 },
             })
