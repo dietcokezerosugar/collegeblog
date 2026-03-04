@@ -6,15 +6,25 @@
   .text-balance {
     text-wrap: balance;
   }
+
   .glass {
     @apply bg-background/60 backdrop-blur-md border border-white/10 shadow-xl;
   }
+
   .glass-dark {
     @apply bg-black/40 backdrop-blur-lg border border-white/5 shadow-2xl;
   }
 }
 
 
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
 
 @layer base {
   :root {
@@ -44,6 +54,7 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;

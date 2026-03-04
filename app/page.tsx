@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { Post } from "@/types/database"
 import { ArrowRight, PenLine, Sparkles } from "lucide-react"
+import { AuthModal } from "@/components/auth/auth-modal"
 
 export default async function HomePage() {
   const supabase = createClient()
@@ -45,13 +46,23 @@ export default async function HomePage() {
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-500">
-                <Link href={user ? "/dashboard/new" : "/signup"}>
-                  <Button size="lg" className="h-14 px-8 text-lg rounded-full shadow-2xl hover:shadow-primary/20 transition-all hover:scale-105 active:scale-95 group">
-                    <PenLine className="mr-2 h-5 w-5" />
-                    Start Writing Now
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
+                {user ? (
+                  <Link href="/dashboard/new">
+                    <Button size="lg" className="h-14 px-8 text-lg rounded-full shadow-2xl hover:shadow-primary/20 transition-all hover:scale-105 active:scale-95 group">
+                      <PenLine className="mr-2 h-5 w-5" />
+                      Start Writing Now
+                      <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
+                ) : (
+                  <AuthModal defaultTab="signup">
+                    <Button size="lg" className="h-14 px-8 text-lg rounded-full shadow-2xl hover:shadow-primary/20 transition-all hover:scale-105 active:scale-95 group">
+                      <PenLine className="mr-2 h-5 w-5" />
+                      Start Writing Now
+                      <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </AuthModal>
+                )}
                 <Link href="#feed">
                   <Button variant="outline" size="lg" className="h-14 px-8 text-lg rounded-full bg-background/50 backdrop-blur-sm">
                     Read Others
